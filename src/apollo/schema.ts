@@ -19,266 +19,128 @@ export type Scalars = {
    */
   DateTime: any;
   /**
-   * The `GenericScalar` scalar type represents a generic
-   * GraphQL scalar value that could be:
-   * String, Boolean, Int, Float, List or Object.
+   * Allows use of a JSON String for input / output from the GraphQL schema.
+   *
+   * Use of this type is *not recommended* as you lose the benefits of having a defined, static
+   * schema (one of the key benefits of GraphQL).
    */
-  GenericScalar: any;
-  /**
-   * Create scalar that ignores normal serialization/deserialization, since
-   * that will be handled by the multipart request spec
-   */
-  Upload: any;
+  JSONString: any;
 };
 
-export type AddressNode = Node & {
-  __typename?: 'AddressNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  addressName: Scalars['String'];
-  selectedAddress: ProfileNodeConnection;
+export type CreateCustomUser = {
+  __typename?: 'CreateCustomUser';
+  ok?: Maybe<Scalars['Boolean']>;
 };
 
-
-export type AddressNodeSelectedAddressArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
+export type CreateTask = {
+  __typename?: 'CreateTask';
+  ok?: Maybe<Scalars['Boolean']>;
 };
 
-export type AddressNodeConnection = {
-  __typename?: 'AddressNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<AddressNodeEdge>>;
-};
-
-/** A Relay edge containing a `AddressNode` and its cursor. */
-export type AddressNodeEdge = {
-  __typename?: 'AddressNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<AddressNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-export type CreateMessageMutationInput = {
-  distination: Scalars['ID'];
-  text: Scalars['String'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateMessageMutationPayload = {
-  __typename?: 'CreateMessageMutationPayload';
-  message?: Maybe<MessageNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreatePostMutationInput = {
-  title: Scalars['String'];
-  content: Scalars['String'];
-  postImage?: Maybe<Scalars['Upload']>;
-  isPublished: Scalars['Boolean'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreatePostMutationPayload = {
-  __typename?: 'CreatePostMutationPayload';
-  post?: Maybe<PostNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateProfileMutationInput = {
-  profileName: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  selectedGender: Scalars['ID'];
-  selectedAddress: Scalars['ID'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateProfileMutationPayload = {
-  __typename?: 'CreateProfileMutationPayload';
-  profile?: Maybe<ProfileNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateUserMutationInput = {
+export type CustomUserNode = Node & {
+  __typename?: 'CustomUserNode';
+  ulid: Scalars['String'];
+  username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateUserMutationPayload = {
-  __typename?: 'CreateUserMutationPayload';
-  user?: Maybe<UserNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-
-export type DeletePostMutationInput = {
-  id: Scalars['ID'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type DeletePostMutationPayload = {
-  __typename?: 'DeletePostMutationPayload';
-  post?: Maybe<PostNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type GenderNode = Node & {
-  __typename?: 'GenderNode';
+  fullName?: Maybe<Scalars['String']>;
+  isVerified: Scalars['Boolean'];
+  tasks?: Maybe<TaskNodeConnection>;
   /** The ID of the object. */
   id: Scalars['ID'];
-  genderName: Scalars['String'];
-  selectedGender: ProfileNodeConnection;
 };
 
 
-export type GenderNodeSelectedGenderArgs = {
-  offset?: Maybe<Scalars['Int']>;
+export type CustomUserNodeTasksArgs = {
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
 };
 
-export type GenderNodeConnection = {
-  __typename?: 'GenderNodeConnection';
+export type CustomUserNodeConnection = {
+  __typename?: 'CustomUserNodeConnection';
   /** Pagination data for this connection. */
   pageInfo: PageInfo;
   /** Contains the nodes in this connection. */
-  edges: Array<Maybe<GenderNodeEdge>>;
+  edges: Array<Maybe<CustomUserNodeEdge>>;
 };
 
-/** A Relay edge containing a `GenderNode` and its cursor. */
-export type GenderNodeEdge = {
-  __typename?: 'GenderNodeEdge';
+/** A Relay edge containing a `CustomUserNode` and its cursor. */
+export type CustomUserNodeEdge = {
+  __typename?: 'CustomUserNodeEdge';
   /** The item at the end of the edge */
-  node?: Maybe<GenderNode>;
+  node?: Maybe<CustomUserNode>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
 
 
-export type MessageNode = Node & {
-  __typename?: 'MessageNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  sender: UserNode;
-  destination: UserNode;
-  text: Scalars['String'];
-  createdAt: Scalars['DateTime'];
+export type DeleteTask = {
+  __typename?: 'DeleteTask';
+  ok?: Maybe<Scalars['Boolean']>;
 };
 
-export type MessageNodeConnection = {
-  __typename?: 'MessageNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<MessageNodeEdge>>;
-};
-
-/** A Relay edge containing a `MessageNode` and its cursor. */
-export type MessageNodeEdge = {
-  __typename?: 'MessageNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<MessageNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createUser?: Maybe<CreateUserMutationPayload>;
-  createProfile?: Maybe<CreateProfileMutationPayload>;
-  updateProfile?: Maybe<UpdateProfileMutationPayload>;
-  createPost?: Maybe<CreatePostMutationPayload>;
-  updatePost?: Maybe<UpdatePostMutationPayload>;
-  deletePost?: Maybe<DeletePostMutationPayload>;
-  createMessage?: Maybe<CreateMessageMutationPayload>;
-  /** Obtain JSON Web Token mutation */
-  tokenAuth?: Maybe<ObtainJsonWebToken>;
-  refreshToken?: Maybe<Refresh>;
+  createCustomUser?: Maybe<CreateCustomUser>;
+  updateVerifyCustomUser?: Maybe<UpdateVerifyCustomUser>;
+  createTask?: Maybe<CreateTask>;
+  updateTask?: Maybe<UpdateTask>;
+  deleteTask?: Maybe<DeleteTask>;
+  updateTokens?: Maybe<UpdateTokens>;
+  sendMagicLinkEmail?: Maybe<SendMagicLinkEmail>;
+  reAuthentication?: Maybe<ReAuthentication>;
 };
 
 
-export type MutationCreateUserArgs = {
-  input: CreateUserMutationInput;
+export type MutationCreateCustomUserArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
 };
 
 
-export type MutationCreateProfileArgs = {
-  input: CreateProfileMutationInput;
+export type MutationCreateTaskArgs = {
+  content?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 
-export type MutationUpdateProfileArgs = {
-  input: UpdateProfileMutationInput;
+export type MutationUpdateTaskArgs = {
+  content: Scalars['String'];
+  id: Scalars['ID'];
+  isDone: Scalars['Boolean'];
+  title: Scalars['String'];
 };
 
 
-export type MutationCreatePostArgs = {
-  input: CreatePostMutationInput;
+export type MutationDeleteTaskArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type MutationUpdatePostArgs = {
-  input: UpdatePostMutationInput;
+export type MutationUpdateTokensArgs = {
+  oldRefreshToken: Scalars['String'];
 };
 
 
-export type MutationDeletePostArgs = {
-  input: DeletePostMutationInput;
-};
-
-
-export type MutationCreateMessageArgs = {
-  input: CreateMessageMutationInput;
-};
-
-
-export type MutationTokenAuthArgs = {
+export type MutationSendMagicLinkEmailArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
 
 
-export type MutationRefreshTokenArgs = {
-  refreshToken?: Maybe<Scalars['String']>;
+export type MutationReAuthenticationArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 /** An object with an ID */
 export type Node = {
   /** The ID of the object. */
   id: Scalars['ID'];
-};
-
-/** Obtain JSON Web Token mutation */
-export type ObtainJsonWebToken = {
-  __typename?: 'ObtainJSONWebToken';
-  payload: Scalars['GenericScalar'];
-  refreshExpiresIn: Scalars['Int'];
-  token: Scalars['String'];
-  refreshToken: Scalars['String'];
 };
 
 /** The Relay compliant `PageInfo` type, containing data necessary to paginate this connection. */
@@ -294,123 +156,19 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars['String']>;
 };
 
-export type PostNode = Node & {
-  __typename?: 'PostNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  postedUser: UserNode;
-  title: Scalars['String'];
-  content: Scalars['String'];
-  postImage?: Maybe<Scalars['String']>;
-  isPublished: Scalars['Boolean'];
-  publishedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  targetPost: ReviewNodeConnection;
-};
-
-
-export type PostNodeTargetPostArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type PostNodeConnection = {
-  __typename?: 'PostNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<PostNodeEdge>>;
-};
-
-/** A Relay edge containing a `PostNode` and its cursor. */
-export type PostNodeEdge = {
-  __typename?: 'PostNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<PostNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-export type ProfileNode = Node & {
-  __typename?: 'ProfileNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  targetUser: UserNode;
-  telephoneNumber: Scalars['String'];
-  profileName: Scalars['String'];
-  profileText: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  profileImage?: Maybe<Scalars['String']>;
-  followingUsers: UserNodeConnection;
-  selectedAddress: AddressNode;
-  selectedGender: GenderNode;
-  tags: TagNodeConnection;
-};
-
-
-export type ProfileNodeFollowingUsersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
-  email_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type ProfileNodeTagsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  tagName?: Maybe<Scalars['String']>;
-  tagName_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type ProfileNodeConnection = {
-  __typename?: 'ProfileNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<ProfileNodeEdge>>;
-};
-
-/** A Relay edge containing a `ProfileNode` and its cursor. */
-export type ProfileNodeEdge = {
-  __typename?: 'ProfileNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<ProfileNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  user?: Maybe<UserNode>;
-  allUsers?: Maybe<UserNodeConnection>;
-  myProfile?: Maybe<ProfileNode>;
-  profile?: Maybe<ProfileNode>;
-  allProfiles?: Maybe<ProfileNodeConnection>;
-  post?: Maybe<PostNode>;
-  allPosts?: Maybe<PostNodeConnection>;
-  tag?: Maybe<TagNode>;
-  allTags?: Maybe<TagNodeConnection>;
-  review?: Maybe<ReviewNode>;
-  allReviews?: Maybe<ReviewNodeConnection>;
-  gender?: Maybe<GenderNode>;
-  allGenders?: Maybe<GenderNodeConnection>;
-  address?: Maybe<AddressNode>;
-  allAddresses?: Maybe<AddressNodeConnection>;
+  node?: Maybe<Node>;
+  currentUser?: Maybe<CustomUserNode>;
+  user?: Maybe<CustomUserNode>;
+  allUsers?: Maybe<CustomUserNodeConnection>;
+  task?: Maybe<TaskNode>;
+  allTasks?: Maybe<TaskNodeConnection>;
+};
+
+
+export type QueryNodeArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -420,482 +178,191 @@ export type QueryUserArgs = {
 
 
 export type QueryAllUsersArgs = {
-  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
-  email_Icontains?: Maybe<Scalars['String']>;
 };
 
 
-export type QueryProfileArgs = {
+export type QueryTaskArgs = {
   id: Scalars['ID'];
 };
 
 
-export type QueryAllProfilesArgs = {
-  offset?: Maybe<Scalars['Int']>;
+export type QueryAllTasksArgs = {
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
+};
+
+export type ReAuthentication = {
+  __typename?: 'ReAuthentication';
+  tokensObject?: Maybe<Scalars['JSONString']>;
 };
 
 
-export type QueryPostArgs = {
-  id: Scalars['ID'];
+export type ReAuthenticationTokensObjectArgs = {
+  accessToken?: Maybe<Scalars['String']>;
+  accessTokenExp?: Maybe<Scalars['DateTime']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  refreshTokenExp?: Maybe<Scalars['DateTime']>;
 };
 
-
-export type QueryAllPostsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  title_Icontains?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  content_Icontains?: Maybe<Scalars['String']>;
+export type SendMagicLinkEmail = {
+  __typename?: 'SendMagicLinkEmail';
+  ok?: Maybe<Scalars['Boolean']>;
 };
 
-
-export type QueryTagArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllTagsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  tagName?: Maybe<Scalars['String']>;
-  tagName_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryReviewArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllReviewsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryGenderArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllGendersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  genderName?: Maybe<Scalars['String']>;
-  genderName_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryAddressArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryAllAddressesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  addressName?: Maybe<Scalars['String']>;
-  addressName_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type Refresh = {
-  __typename?: 'Refresh';
-  payload: Scalars['GenericScalar'];
-  refreshExpiresIn: Scalars['Int'];
-  token: Scalars['String'];
-  refreshToken: Scalars['String'];
-};
-
-export type ReviewNode = Node & {
-  __typename?: 'ReviewNode';
+export type TaskNode = Node & {
+  __typename?: 'TaskNode';
   /** The ID of the object. */
   id: Scalars['ID'];
-  targetPost: PostNode;
-  reviewedUser: UserNode;
-  reviewText: Scalars['String'];
-  stars: Scalars['Int'];
+  taskCreatorUlid: Scalars['String'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+  isDone: Scalars['Boolean'];
+  createdAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type ReviewNodeConnection = {
-  __typename?: 'ReviewNodeConnection';
+export type TaskNodeConnection = {
+  __typename?: 'TaskNodeConnection';
   /** Pagination data for this connection. */
   pageInfo: PageInfo;
   /** Contains the nodes in this connection. */
-  edges: Array<Maybe<ReviewNodeEdge>>;
+  edges: Array<Maybe<TaskNodeEdge>>;
 };
 
-/** A Relay edge containing a `ReviewNode` and its cursor. */
-export type ReviewNodeEdge = {
-  __typename?: 'ReviewNodeEdge';
+/** A Relay edge containing a `TaskNode` and its cursor. */
+export type TaskNodeEdge = {
+  __typename?: 'TaskNodeEdge';
   /** The item at the end of the edge */
-  node?: Maybe<ReviewNode>;
+  node?: Maybe<TaskNode>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
 
-export type TagNode = Node & {
-  __typename?: 'TagNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  tagName: Scalars['String'];
-  tags: ProfileNodeConnection;
+export type UpdateTask = {
+  __typename?: 'UpdateTask';
+  ok?: Maybe<Scalars['Boolean']>;
+};
+
+export type UpdateTokens = {
+  __typename?: 'UpdateTokens';
+  tokensObject?: Maybe<Scalars['JSONString']>;
 };
 
 
-export type TagNodeTagsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
+export type UpdateTokensTokensObjectArgs = {
+  accessToken?: Maybe<Scalars['String']>;
+  accessTokenExp?: Maybe<Scalars['DateTime']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  refreshTokenExp?: Maybe<Scalars['DateTime']>;
 };
 
-export type TagNodeConnection = {
-  __typename?: 'TagNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<TagNodeEdge>>;
-};
-
-/** A Relay edge containing a `TagNode` and its cursor. */
-export type TagNodeEdge = {
-  __typename?: 'TagNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<TagNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-export type UpdatePostMutationInput = {
-  id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  postImage?: Maybe<Scalars['Upload']>;
-  isPublished?: Maybe<Scalars['Boolean']>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdatePostMutationPayload = {
-  __typename?: 'UpdatePostMutationPayload';
-  post?: Maybe<PostNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateProfileMutationInput = {
-  id: Scalars['ID'];
-  profileName: Scalars['String'];
-  isCollegeStudent: Scalars['Boolean'];
-  schoolName: Scalars['String'];
-  selectedGender: Scalars['ID'];
-  selectedAddress: Scalars['ID'];
-  followingUsers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  tags?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateProfileMutationPayload = {
-  __typename?: 'UpdateProfileMutationPayload';
-  profile?: Maybe<ProfileNode>;
-  clientMutationId?: Maybe<Scalars['String']>;
+export type UpdateVerifyCustomUser = {
+  __typename?: 'UpdateVerifyCustomUser';
+  refreshTokenObject?: Maybe<Scalars['JSONString']>;
 };
 
 
-export type UserNode = Node & {
-  __typename?: 'UserNode';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  password: Scalars['String'];
-  lastLogin?: Maybe<Scalars['DateTime']>;
-  /** 全ての権限を持っているとみなされます。 */
-  isSuperuser: Scalars['Boolean'];
-  email: Scalars['String'];
-  isActive: Scalars['Boolean'];
-  isStaff: Scalars['Boolean'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  targetUser?: Maybe<ProfileNode>;
-  followingUsers: ProfileNodeConnection;
-  postedUser: PostNodeConnection;
-  reviewedUser: ReviewNodeConnection;
-  sender: MessageNodeConnection;
-  destination: MessageNodeConnection;
+export type UpdateVerifyCustomUserRefreshTokenObjectArgs = {
+  refreshToken?: Maybe<Scalars['String']>;
+  expirationDate?: Maybe<Scalars['String']>;
 };
 
-
-export type UserNodeFollowingUsersArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  profileName?: Maybe<Scalars['String']>;
-  profileName_Icontains?: Maybe<Scalars['String']>;
-  isCollegeStudent?: Maybe<Scalars['Boolean']>;
-  schoolName?: Maybe<Scalars['String']>;
-  schoolName_Icontains?: Maybe<Scalars['String']>;
-  selectedAddress?: Maybe<Scalars['ID']>;
-  selectedGender?: Maybe<Scalars['ID']>;
-};
-
-
-export type UserNodePostedUserArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  title_Icontains?: Maybe<Scalars['String']>;
-  content?: Maybe<Scalars['String']>;
-  content_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeReviewedUserArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  stars?: Maybe<Scalars['Int']>;
-  reviewText?: Maybe<Scalars['String']>;
-  reviewText_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeSenderArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  text_Icontains?: Maybe<Scalars['String']>;
-};
-
-
-export type UserNodeDestinationArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  text?: Maybe<Scalars['String']>;
-  text_Icontains?: Maybe<Scalars['String']>;
-};
-
-export type UserNodeConnection = {
-  __typename?: 'UserNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<UserNodeEdge>>;
-};
-
-/** A Relay edge containing a `UserNode` and its cursor. */
-export type UserNodeEdge = {
-  __typename?: 'UserNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<UserNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
-export type CreateUserMutationVariables = Exact<{
+export type CreateCustomUserMutationVariables = Exact<{
+  username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
 }>;
 
 
-export type CreateUserMutation = (
+export type CreateCustomUserMutation = (
   { __typename?: 'Mutation' }
-  & { createUser?: Maybe<(
-    { __typename?: 'CreateUserMutationPayload' }
-    & { user?: Maybe<(
-      { __typename?: 'UserNode' }
-      & Pick<UserNode, 'id' | 'email'>
-    )> }
+  & { createCustomUser?: Maybe<(
+    { __typename?: 'CreateCustomUser' }
+    & Pick<CreateCustomUser, 'ok'>
   )> }
 );
 
-export type GetTokensMutationVariables = Exact<{
-  email: Scalars['String'];
-  password: Scalars['String'];
-}>;
+export type UpdateVerifyCustomUserMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTokensMutation = (
+export type UpdateVerifyCustomUserMutation = (
   { __typename?: 'Mutation' }
-  & { tokenAuth?: Maybe<(
-    { __typename?: 'ObtainJSONWebToken' }
-    & Pick<ObtainJsonWebToken, 'payload' | 'token' | 'refreshExpiresIn' | 'refreshToken'>
-  )> }
-);
-
-export type RefreshTokensMutationVariables = Exact<{
-  refreshToken: Scalars['String'];
-}>;
-
-
-export type RefreshTokensMutation = (
-  { __typename?: 'Mutation' }
-  & { refreshToken?: Maybe<(
-    { __typename?: 'Refresh' }
-    & Pick<Refresh, 'token' | 'payload' | 'refreshToken' | 'refreshExpiresIn'>
+  & { updateVerifyCustomUser?: Maybe<(
+    { __typename?: 'UpdateVerifyCustomUser' }
+    & Pick<UpdateVerifyCustomUser, 'refreshTokenObject'>
   )> }
 );
 
 
-export const CreateUserDocument = gql`
-    mutation CreateUser($email: String!, $password: String!) {
-  createUser(input: {email: $email, password: $password}) {
-    user {
-      id
-      email
-    }
+export const CreateCustomUserDocument = gql`
+    mutation CreateCustomUser($username: String!, $email: String!, $password: String!) {
+  createCustomUser(username: $username, email: $email, password: $password) {
+    ok
   }
 }
     `;
-export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+export type CreateCustomUserMutationFn = Apollo.MutationFunction<CreateCustomUserMutation, CreateCustomUserMutationVariables>;
 
 /**
- * __useCreateUserMutation__
+ * __useCreateCustomUserMutation__
  *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateCustomUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCustomUserMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ * const [createCustomUserMutation, { data, loading, error }] = useCreateCustomUserMutation({
  *   variables: {
+ *      username: // value for 'username'
  *      email: // value for 'email'
  *      password: // value for 'password'
  *   },
  * });
  */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+export function useCreateCustomUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateCustomUserMutation, CreateCustomUserMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+        return Apollo.useMutation<CreateCustomUserMutation, CreateCustomUserMutationVariables>(CreateCustomUserDocument, options);
       }
-export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
-export const GetTokensDocument = gql`
-    mutation GetTokens($email: String!, $password: String!) {
-  tokenAuth(email: $email, password: $password) {
-    payload
-    token
-    refreshExpiresIn
-    refreshToken
+export type CreateCustomUserMutationHookResult = ReturnType<typeof useCreateCustomUserMutation>;
+export type CreateCustomUserMutationResult = Apollo.MutationResult<CreateCustomUserMutation>;
+export type CreateCustomUserMutationOptions = Apollo.BaseMutationOptions<CreateCustomUserMutation, CreateCustomUserMutationVariables>;
+export const UpdateVerifyCustomUserDocument = gql`
+    mutation UpdateVerifyCustomUser {
+  updateVerifyCustomUser {
+    refreshTokenObject
   }
 }
     `;
-export type GetTokensMutationFn = Apollo.MutationFunction<GetTokensMutation, GetTokensMutationVariables>;
+export type UpdateVerifyCustomUserMutationFn = Apollo.MutationFunction<UpdateVerifyCustomUserMutation, UpdateVerifyCustomUserMutationVariables>;
 
 /**
- * __useGetTokensMutation__
+ * __useUpdateVerifyCustomUserMutation__
  *
- * To run a mutation, you first call `useGetTokensMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useGetTokensMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateVerifyCustomUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateVerifyCustomUserMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [getTokensMutation, { data, loading, error }] = useGetTokensMutation({
+ * const [updateVerifyCustomUserMutation, { data, loading, error }] = useUpdateVerifyCustomUserMutation({
  *   variables: {
- *      email: // value for 'email'
- *      password: // value for 'password'
  *   },
  * });
  */
-export function useGetTokensMutation(baseOptions?: Apollo.MutationHookOptions<GetTokensMutation, GetTokensMutationVariables>) {
+export function useUpdateVerifyCustomUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateVerifyCustomUserMutation, UpdateVerifyCustomUserMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<GetTokensMutation, GetTokensMutationVariables>(GetTokensDocument, options);
+        return Apollo.useMutation<UpdateVerifyCustomUserMutation, UpdateVerifyCustomUserMutationVariables>(UpdateVerifyCustomUserDocument, options);
       }
-export type GetTokensMutationHookResult = ReturnType<typeof useGetTokensMutation>;
-export type GetTokensMutationResult = Apollo.MutationResult<GetTokensMutation>;
-export type GetTokensMutationOptions = Apollo.BaseMutationOptions<GetTokensMutation, GetTokensMutationVariables>;
-export const RefreshTokensDocument = gql`
-    mutation RefreshTokens($refreshToken: String!) {
-  refreshToken(refreshToken: $refreshToken) {
-    token
-    payload
-    refreshToken
-    refreshExpiresIn
-  }
-}
-    `;
-export type RefreshTokensMutationFn = Apollo.MutationFunction<RefreshTokensMutation, RefreshTokensMutationVariables>;
-
-/**
- * __useRefreshTokensMutation__
- *
- * To run a mutation, you first call `useRefreshTokensMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRefreshTokensMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [refreshTokensMutation, { data, loading, error }] = useRefreshTokensMutation({
- *   variables: {
- *      refreshToken: // value for 'refreshToken'
- *   },
- * });
- */
-export function useRefreshTokensMutation(baseOptions?: Apollo.MutationHookOptions<RefreshTokensMutation, RefreshTokensMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RefreshTokensMutation, RefreshTokensMutationVariables>(RefreshTokensDocument, options);
-      }
-export type RefreshTokensMutationHookResult = ReturnType<typeof useRefreshTokensMutation>;
-export type RefreshTokensMutationResult = Apollo.MutationResult<RefreshTokensMutation>;
-export type RefreshTokensMutationOptions = Apollo.BaseMutationOptions<RefreshTokensMutation, RefreshTokensMutationVariables>;
+export type UpdateVerifyCustomUserMutationHookResult = ReturnType<typeof useUpdateVerifyCustomUserMutation>;
+export type UpdateVerifyCustomUserMutationResult = Apollo.MutationResult<UpdateVerifyCustomUserMutation>;
+export type UpdateVerifyCustomUserMutationOptions = Apollo.BaseMutationOptions<UpdateVerifyCustomUserMutation, UpdateVerifyCustomUserMutationVariables>;

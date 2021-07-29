@@ -8,8 +8,13 @@ const SignUp: NextPage = () => {
   return (
     <Layout meta={{ pageName: "SignUp" }}>
       <form className="border" onSubmit={handleSignUp}>
-        <input type="email" value={inputEmail} onChange={handleEmailChange} />
-        <input type="password" value={inputPassword} onChange={handlePasswordChange} />
+        <input type="email" placeholder="email" value={inputEmail} onChange={handleEmailChange} />
+        <input
+          type="password"
+          placeholder="password"
+          value={inputPassword}
+          onChange={handlePasswordChange}
+        />
         <button className="border" type="submit">
           SignUp
         </button>

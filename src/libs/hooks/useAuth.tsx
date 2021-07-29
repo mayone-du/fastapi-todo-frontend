@@ -1,12 +1,13 @@
-import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { destroyCookie, parseCookies } from "nookies";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
-import { useCreateUserMutation, useGetTokensMutation } from "src/apollo/schema";
-import { calcDate } from "src/libs/calcDate";
+import { useCreateCustomUserMutation } from "src/apollo/schema";
+// import { calcDate } from "src/libs/calcDate";
 
 export const useAuth = () => {
-  const [createUserMutation] = useCreateUserMutation();
-  const [getTokensMutation] = useGetTokensMutation();
+  const [createCustomUserMutation] = useCreateCustomUserMutation();
+  // TODO: reducerに置き換え
+  const [inputUserName, setInputUserName] = useState("test name");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const handleEmailChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,47 +32,16 @@ export const useAuth = () => {
     }
   }, [inputEmail, inputPassword]);
 
-  // signIn
-  const handleSignIn = async (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const { isFormError } = validateInputs();
-    if (!isFormError) {
-      try {
-        const { data: tokenData } = await getTokensMutation({
-          variables: {
-            email: inputEmail,
-            password: inputPassword,
-          },
-        });
-
-        if (tokenData?.tokenAuth) {
-          setCookie(null, "accessToken", tokenData.tokenAuth.token, {
-            path: "/",
-            maxAge: calcDate(tokenData.tokenAuth.payload.exp),
-          });
-          setCookie(null, "refreshToken", tokenData.tokenAuth.refreshToken, {
-            path: "/",
-            maxAge: calcDate(tokenData.tokenAuth.refreshExpiresIn),
-          });
-        }
-        setInputEmail("");
-        setInputPassword("");
-      } catch (error) {
-        toast.error("エラーが発生しました。");
-        console.error(error);
-        return;
-      }
-    }
-  };
-
   // signUp
   const handleSignUp = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { isFormError } = validateInputs();
     if (!isFormError) {
-      await createUserMutation({ variables: { email: inputEmail, password: inputPassword } });
-      await handleSignIn(event);
+      await createCustomUserMutation({
+        variables: { username: inputUserName, email: inputEmail, password: inputPassword },
+      });
+      setInputUserName("");
       setInputEmail("");
       setInputPassword("");
     }
@@ -91,7 +61,6 @@ export const useAuth = () => {
     handleEmailChange,
     handlePasswordChange,
     handleSignUp,
-    handleSignIn,
     handleSignOut,
   };
 };

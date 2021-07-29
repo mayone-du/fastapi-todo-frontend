@@ -21,7 +21,7 @@ const authLink = setContext((operation, { headers }) => {
 
   // return the headers to the context so httpLink can read them
   return accessToken
-    ? { headers: { ...headers, authorization: `JWT ${accessToken}` } }
+    ? { headers: { ...headers, authorization: `Bearer ${accessToken}` } }
     : { headers };
 });
 
