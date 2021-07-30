@@ -1,7 +1,7 @@
 import { destroyCookie, parseCookies } from "nookies";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
-import { useCreateCustomUserMutation } from "src/apollo/schema";
+import { useCreateCustomUserMutation } from "src/graphql/schemas/schema";
 // import { calcDate } from "src/libs/calcDate";
 
 export const useAuth = () => {
