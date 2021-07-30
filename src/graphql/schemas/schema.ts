@@ -104,6 +104,7 @@ export type MutationCreateCustomUserArgs = {
 
 export type MutationCreateTaskArgs = {
   content?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
 
@@ -224,6 +225,7 @@ export type TaskNode = Node & {
   content: Scalars['String'];
   isDone: Scalars['Boolean'];
   createdAt?: Maybe<Scalars['DateTime']>;
+  thumbnailPath: Scalars['String'];
 };
 
 export type TaskNodeConnection = {
@@ -290,6 +292,7 @@ export type CreateCustomUserMutation = (
 export type CreateTaskMutationVariables = Exact<{
   title: Scalars['String'];
   content: Scalars['String'];
+  thumbnail?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -349,8 +352,8 @@ export type CreateCustomUserMutationHookResult = ReturnType<typeof useCreateCust
 export type CreateCustomUserMutationResult = Apollo.MutationResult<CreateCustomUserMutation>;
 export type CreateCustomUserMutationOptions = Apollo.BaseMutationOptions<CreateCustomUserMutation, CreateCustomUserMutationVariables>;
 export const CreateTaskDocument = gql`
-    mutation CreateTask($title: String!, $content: String!) {
-  createTask(title: $title, content: $content) {
+    mutation CreateTask($title: String!, $content: String!, $thumbnail: String) {
+  createTask(title: $title, content: $content, thumbnail: $thumbnail) {
     ok
   }
 }
@@ -372,6 +375,7 @@ export type CreateTaskMutationFn = Apollo.MutationFunction<CreateTaskMutation, C
  *   variables: {
  *      title: // value for 'title'
  *      content: // value for 'content'
+ *      thumbnail: // value for 'thumbnail'
  *   },
  * });
  */
